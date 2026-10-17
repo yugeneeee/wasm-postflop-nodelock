@@ -1,1 +1,28 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" type="image/png" href="favicon.png"><title>WASM Postflop - Free GTO Solver for Web Browser</title><script src="coi-serviceworker.min.js"></script><script defer="defer" src="b29d083c1b216836b38e.js"></script><link href="5a4596d10d0062e839bb.css" rel="stylesheet"></head><body><div id="app"></div></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" type="image/png" href="favicon.png"/><title>WASM Postflop - Free GTO Solver for Web Browser</title><script>// Static hosts (e.g. GitHub Pages) cannot send COOP/COEP headers, which
+      // are required for `SharedArrayBuffer` and the multi-threaded WASM build.
+      // coi-serviceworker injects those headers for every response; reload once
+      // it takes control so the page starts cross-origin isolated.
+      (function () {
+        if (!("serviceWorker" in navigator) || window.crossOriginIsolated) {
+          return;
+        }
+        navigator.serviceWorker
+          .register("coi-serviceworker.min.js")
+          .catch(function (error) {
+            console.error(
+              "COOP/COEP service worker registration failed:",
+              error
+            );
+          });
+        var reloaded = false;
+        navigator.serviceWorker.addEventListener(
+          "controllerchange",
+          function () {
+            if (reloaded) {
+              return;
+            }
+            reloaded = true;
+            window.location.reload();
+          }
+        );
+      })();</script><script defer="defer" src="7b6721213017a1ffe3c8.js"></script><link href="1d0466a686e08d221d33.css" rel="stylesheet"></head><body><div id="app"></div></body></html>
